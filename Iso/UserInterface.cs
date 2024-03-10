@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended.BitmapFonts;
 using System.Linq;
 
 namespace iso;
@@ -69,18 +70,24 @@ public class UserInterface
 
 	public void Draw(SpriteBatch spriteBatch)
 	{
-		spriteBatch.Begin();
+		spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp);
 		{
 			spriteBatch.Draw(SelectedBuildType == BuildType.None ? AssetManager.NoneIconPressed : AssetManager.NoneIcon, new Vector2(540, 680), Color.White);
 			spriteBatch.Draw(SelectedBuildType == BuildType.Road ? AssetManager.RoadIconPressed : AssetManager.RoadIcon, new Vector2(580, 680), Color.White);
 			spriteBatch.Draw(SelectedBuildType == BuildType.Building ? AssetManager.BuildingIconPressed : AssetManager.BuildingIcon, new Vector2(620, 680), Color.White);
 			spriteBatch.Draw(SelectedBuildType == BuildType.Erase ? AssetManager.EraseIconPressed : AssetManager.EraseIcon, new Vector2(660, 680), Color.White);
 
-			spriteBatch.DrawString(AssetManager.Font, "1", new Vector2(559, 660), Color.Black);
-			spriteBatch.DrawString(AssetManager.Font, "2", new Vector2(599, 660), Color.Black);
-			spriteBatch.DrawString(AssetManager.Font, "3", new Vector2(639, 660), Color.Black);
-			spriteBatch.DrawString(AssetManager.Font, "4", new Vector2(679, 660), Color.Black);
-		}
+			spriteBatch.DrawString(AssetManager.Font, "1", new Vector2(552, 653), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 2.0f, SpriteEffects.None, 0.0f);
+			spriteBatch.DrawString(AssetManager.Font, "2", new Vector2(592, 653), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 2.0f, SpriteEffects.None, 0.0f);
+			spriteBatch.DrawString(AssetManager.Font, "3", new Vector2(632, 653), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 2.0f, SpriteEffects.None, 0.0f);
+			spriteBatch.DrawString(AssetManager.Font, "4", new Vector2(672, 653), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 2.0f, SpriteEffects.None, 0.0f);
+
+            if (Iso.SelectedCell.X >= 0 && Iso.SelectedCell.X < Iso.WorldSize.X && Iso.SelectedCell.Y >= 0 && Iso.SelectedCell.Y < Iso.WorldSize.Y)
+            {
+                spriteBatch.Draw(AssetManager.TileSelect, GameHelper.ToScreen(Iso.SelectedCell), Color.White);
+                spriteBatch.DrawString(AssetManager.Font, "Selected tile: " + Iso.SelectedCell.X + ", " + Iso.SelectedCell.Y, new Vector2(1000, 10), Color.Black, 0.0f, new Vector2(0.0f, 0.0f), 2.0f, SpriteEffects.None, 0.0f);
+            }
+        }
 		spriteBatch.End();
 	}
 }

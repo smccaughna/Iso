@@ -40,9 +40,9 @@ public class Iso : Game
 	{
 		Map = GameHelper.GenerateMap();
 		Roads = new Road[WorldSize.X, WorldSize.Y];
-		Buildings = new Building[WorldSize.X, WorldSize.Y];
+        Buildings = new Building[WorldSize.X, WorldSize.Y];
 
-		_userInterface = new UserInterface();
+        _userInterface = new UserInterface();
 
 		base.Initialize();
 	}
@@ -99,16 +99,6 @@ public class Iso : Game
 			building?.Draw(_spriteBatch);
 
 		_userInterface.Draw(_spriteBatch);
-
-		_spriteBatch.Begin();
-		{
-			if (SelectedCell.X >= 0 && SelectedCell.X < WorldSize.X && SelectedCell.Y >= 0 && SelectedCell.Y < WorldSize.Y)
-			{
-				_spriteBatch.Draw(AssetManager.TileSelect, GameHelper.ToScreen(SelectedCell), Color.White);
-				_spriteBatch.DrawString(AssetManager.Font, "Selected tile: " + SelectedCell.X + ", " + SelectedCell.Y, new Vector2(1080, 10), Color.Black);
-			}
-		}
-		_spriteBatch.End();
 
 		base.Draw(gameTime);
 	}

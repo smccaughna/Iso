@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.Extended.BitmapFonts;
 
 namespace iso;
 
@@ -70,6 +71,6 @@ public static class AssetManager
 
 		House = content.Load<Texture2D>("sprites/buildings/house");
 
-		Font = content.Load<SpriteFont>("fonts/font");
+		Font = content.Load<SpriteFont>("fonts/openSansPX");
 	}
 }
